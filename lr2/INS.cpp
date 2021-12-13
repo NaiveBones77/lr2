@@ -1,5 +1,6 @@
 #include "INS.h"
 #include <mutex>
+#include <WinSock2.h>
 #include <iostream>
 
 INS::INS(double Latitude, double Longitude, double H, double CourseTrue,
@@ -43,6 +44,9 @@ void INS::start() {
 	mutex.unlock();
 }
 
-int INS::bindPort(SOCKET s, socketaddr_in destAddr) {
-	_s =
+int INS::bindPort(SOCKET s, sockaddr_in destAddr) {
+	_s = s;
+	_destAddr = destAddr;
+	return 1;
 }
+

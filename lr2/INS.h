@@ -1,5 +1,6 @@
 #include <mutex>
-
+#include <WinSock2.h>
+#include <iostream>
 #pragma once
 class INS {
 private:
@@ -8,6 +9,8 @@ private:
 	std::mutex mutex;
 	char* buffer;
 	bool isStart = false;
+	SOCKET _s;
+	sockaddr_in _destAddr;
 
 public:
 	INS(double Latitude, double Longitude, double H, double CourseTrue,
@@ -22,5 +25,7 @@ public:
 
 	void start();
 
-	void sentpack();
+	void sendPack();
+
+	int bindPort(SOCKET s, sockaddr_in destAddr);
 };
