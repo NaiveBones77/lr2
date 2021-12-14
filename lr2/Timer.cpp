@@ -4,7 +4,14 @@
 #include <thread>
 #include <functional>
 
-
+///ÂÑÅÌ ÏÐÈÂÅÒ
+///ÂÑÅÌ ÏÐÈÂÅÒ
+/// ///ÂÑÅÌ ÏÐÈÂÅÒ
+/// ///ÂÑÅÌ ÏÐÈÂÅÒ
+///ÂÑÅÌ ÏÐÈÂÅÒ
+///ÂÑÅÌ ÏÐÈÂÅÒ
+/// ///ÂÑÅÌ ÏÐÈÂÅÒ
+/// ///ÂÑÅÌ ÏÐÈÂÅÒ
 void Timer::add(std::chrono::milliseconds delay, std::function<void()> callback, bool asynchronous = true)
 {
 		if (asynchronous) {
