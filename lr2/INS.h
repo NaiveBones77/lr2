@@ -1,7 +1,8 @@
+#pragma once
 #include <mutex>
 #include <WinSock2.h>
 #include <iostream>
-#pragma once
+
 class INS {
 private:
 	double Latitude, Longitude, H, CourseTrue, Tungazh, List, VelocityNS, VelocityEW,
@@ -11,6 +12,7 @@ private:
 	bool isStart = false;
 	SOCKET _s;
 	sockaddr_in _destAddr;
+	int buff_count;
 
 public:
 	INS(double Latitude, double Longitude, double H, double CourseTrue,

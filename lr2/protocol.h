@@ -54,7 +54,7 @@ union DISCRETE {
 #pragma pack(pop)
 
 #pragma pack(push,1)
-union DATE {
+union CUR_DATE {
 	struct data {
 		unsigned address : 8;
 		unsigned emp1 : 2;

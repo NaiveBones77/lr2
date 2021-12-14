@@ -1,3 +1,4 @@
+#pragma once
 #include "INS.h"
 #include <mutex>
 #include <WinSock2.h>
@@ -28,7 +29,6 @@ void INS::test() {
 
 	mutex.lock();
 	delete[] buffer;
-	char tmp[33];
 
 	DISCRETE pack;   // Слово состояния с признаками "Исправность ИНС" и "Нет начальных данных"
 
@@ -83,9 +83,13 @@ void INS::navigation() {
 }
 
 void INS::start() {
-	mutex.lock();
-
-	mutex.unlock();
+	if (!isStart)
+	{
+		test();
+		preparation();
+		isStart = true;
+	}
+	navigation();
 }
 
 int INS::bindPort(SOCKET s, sockaddr_in destAddr) {

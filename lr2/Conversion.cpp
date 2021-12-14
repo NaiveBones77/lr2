@@ -1,3 +1,4 @@
+#pragma once
 #include "Conversion.h"
 
 double Conversion::conv_bin_to_dec(double max_value, int max_digit, int digit, double value)

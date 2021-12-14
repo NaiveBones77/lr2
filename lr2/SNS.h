@@ -13,6 +13,7 @@ class SNS
 		bool isStart = false;
 		SOCKET _s;
 		sockaddr_in _destAddr;
+		int buff_count;
 	public:
 
 		// конструктор класса
@@ -38,7 +39,8 @@ class SNS
 		//метод определения адресса отправки пакета
 		int bindPort(SOCKET s, sockaddr_in destAddr);
 
-		//todo
-		//
+		template <class T>
+		void fill_buff(T pack);
+
 };
 

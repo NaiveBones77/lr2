@@ -1,3 +1,4 @@
+#pragma once
 #include "SNS.h"
 #include <mutex>
 #include <WinSock2.h>
@@ -86,4 +87,20 @@ int SNS::bindPort(SOCKET s, sockaddr_in destAddr) {
 	_s = s;
 	_destAddr = destAddr;
 	return 1;
+}
+
+template <class T>
+void SNS::fill_buff(T pack)
+{
+	char* buff;
+	buff = new char[sizeof(pack)];					  
+	memset(buff, 0, sizeof(pack));                   
+	memcpy(buff, &pack, sizeof(pack));				  
+
+	for (int i = 0; i < 4; ++i)
+	{
+		buffer[4 * buff_count + i] = buff[i];
+	}
+	buff_count++;
+	delete[] buff;
 }
