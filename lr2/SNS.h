@@ -1,8 +1,9 @@
+
+#pragma once
 #include <mutex>
 #include <WinSock2.h>
 #include <iostream>
-
-#pragma once
+#include "Conversion.h"
 class SNS
 {
 	private:
@@ -14,6 +15,8 @@ class SNS
 		SOCKET _s;
 		sockaddr_in _destAddr;
 		int buff_count;
+		Conversion cs1;
+
 	public:
 
 		// конструктор класса

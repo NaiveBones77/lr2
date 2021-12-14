@@ -1,4 +1,6 @@
+#pragma once
 #include <map>
+#include <iostream>
 
 #pragma pack(push,1)
 union BNR {
@@ -54,7 +56,7 @@ union DISCRETE {
 #pragma pack(pop)
 
 #pragma pack(push,1)
-union CUR_DATE {
+union DATE_ {
 	struct data {
 		unsigned address : 8;
 		unsigned emp1 : 2;

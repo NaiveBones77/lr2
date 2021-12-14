@@ -64,6 +64,9 @@ int main()
 	
 	ins.bindPort(_s, _destAddr);
 
-	
+    Timer timer;
+    timer.add(std::chrono::milliseconds(10), [&]() {ins.sendPack(); });
+    timer.add(std::chrono::microseconds(2500), [&]() {ins.start(); });
 
+    while (true) { std::this_thread::sleep_for(std::chrono::seconds(3600)); };
 }
