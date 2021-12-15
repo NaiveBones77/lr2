@@ -7,9 +7,9 @@
 #include <cstdlib>
 #include <random>
 
-INS::INS(double Latitude, double Longitude, double H, double CourseTrue,
-	double Tungazh, double List, double VelocityNS, double VelocityEW, double VelocityVI,
-	double AccelerationX, double AccelerationZ, double AccelerationY) {
+INS::INS(Val Latitude, Val Longitude, Val H, Val CourseTrue,
+	Val Tungazh, Val List, Val VelocityNS, Val VelocityEW, Val VelocityVI,
+	Val AccelerationX, Val AccelerationZ, Val AccelerationY) {
 	this->Latitude = Latitude;
 	this->Longitude = Longitude;
 	this->H = H;
@@ -133,25 +133,25 @@ void INS::navigation() {
 
 	std::normal_distribution<double>delta(0.0, 0.01);
 
-	double latitude = Latitude + delta(generator);
-	double longitude = Longitude + delta(generator);
-	double h = H + delta(generator);
-	double coursetrue = CourseTrue + delta(generator);
-	double tungazh = Tungazh + delta(generator);
-	double list = List + delta(generator);
-	double velocityns = VelocityNS + delta(generator);
-	double velocityew = VelocityEW + delta(generator);
-	double velocityvi = VelocityVI + delta(generator);
-	double accelerationx = AccelerationX + delta(generator);
-	double accelerationz = AccelerationZ + delta(generator);
-	double accelerationy = AccelerationY + delta(generator);
+	double latitude = Latitude.value + delta(generator);
+	double longitude = Longitude.value + delta(generator);
+	double h = H.value + delta(generator);
+	double coursetrue = CourseTrue.value + delta(generator);
+	double tungazh = Tungazh.value + delta(generator);
+	double list = List.value + delta(generator);
+	double velocityns = VelocityNS.value + delta(generator);
+	double velocityew = VelocityEW.value + delta(generator);
+	double velocityvi = VelocityVI.value + delta(generator);
+	double accelerationx = AccelerationX.value + delta(generator);
+	double accelerationz = AccelerationZ.value + delta(generator);
+	double accelerationy = AccelerationY.value + delta(generator);
 
 	mutex.lock();
 	buff_count = 0;
 
 	BNR pack_1;
 	pack_1.value.address = 200;
-	pack_1.value.high = conv1.conv_dec_to_bin();
+	pack_1.value.high = conv1.conv_dec_to_bin(Latitude.max_value, 20, Latitude.height, latitude);
 	pack_1.value.sign = 1;
 	pack_1.value.sm = 3;
 	pack_1.value.p = 1;
@@ -160,7 +160,7 @@ void INS::navigation() {
 
 	BNR pack_2;
 	pack_2.value.address = 201;
-	pack_2.value.high = conv1.conv_dec_to_bin();
+	pack_2.value.high = conv1.conv_dec_to_bin(Longitude.max_value, 20, Longitude.height, longitude);
 	pack_2.value.sign = 1;
 	pack_2.value.sm = 3;
 	pack_2.value.p = 1;
@@ -169,7 +169,7 @@ void INS::navigation() {
 
 	BNR pack_3;
 	pack_3.value.address = 241;
-	pack_3.value.high = conv1.conv_dec_to_bin();
+	pack_3.value.high = conv1.conv_dec_to_bin(H.max_value, 20, H.height, h);
 	pack_3.value.sign = 1;
 	pack_3.value.sm = 3;
 	pack_3.value.p = 1;
@@ -178,7 +178,7 @@ void INS::navigation() {
 
 	BNR pack_4;
 	pack_4.value.address = 204;
-	pack_4.value.high = conv1.conv_dec_to_bin();
+	pack_4.value.high = conv1.conv_dec_to_bin(CourseTrue.max_value, 20, CourseTrue.height, coursetrue);
 	pack_4.value.sign = 1;
 	pack_4.value.sm = 3;
 	pack_4.value.p = 1;
@@ -187,7 +187,7 @@ void INS::navigation() {
 
 	BNR pack_5;
 	pack_5.value.address = 212;
-	pack_5.value.high = conv1.conv_dec_to_bin();
+	pack_5.value.high = conv1.conv_dec_to_bin(Tungazh.max_value, 20, Tungazh.height, tungazh);
 	pack_5.value.sign = 1;
 	pack_5.value.sm = 3;
 	pack_5.value.p = 1;
@@ -196,7 +196,7 @@ void INS::navigation() {
 
 	BNR pack_6;
 	pack_6.value.address = 213;
-	pack_6.value.high = conv1.conv_dec_to_bin();
+	pack_6.value.high = conv1.conv_dec_to_bin(List.max_value, 20, List.height, list);
 	pack_6.value.sign = 1;
 	pack_6.value.sm = 3;
 	pack_6.value.p = 1;
@@ -205,7 +205,7 @@ void INS::navigation() {
 
 	BNR pack_7;
 	pack_7.value.address = 246;
-	pack_7.value.high = conv1.conv_dec_to_bin();
+	pack_7.value.high = conv1.conv_dec_to_bin(VelocityNS.max_value, 20, VelocityNS.height, velocityns);
 	pack_7.value.sign = 1;
 	pack_7.value.sm = 3;
 	pack_7.value.p = 1;
@@ -214,7 +214,7 @@ void INS::navigation() {
 
 	BNR pack_8;
 	pack_8.value.address = 247;
-	pack_8.value.high = conv1.conv_dec_to_bin();
+	pack_8.value.high = conv1.conv_dec_to_bin(VelocityEW.max_value, 20, VelocityEW.height, velocityew);
 	pack_8.value.sign = 1;
 	pack_8.value.sm = 3;
 	pack_8.value.p = 1;
@@ -223,16 +223,16 @@ void INS::navigation() {
 
 	BNR pack_9;
 	pack_9.value.address = 245;
-	pack_9.value.high = conv1.conv_dec_to_bin();
+	pack_9.value.high = conv1.conv_dec_to_bin(VelocityVI.max_value, 20, VelocityVI.height, velocityvi);
 	pack_9.value.sign = 1;
 	pack_9.value.sm = 3;
 	pack_9.value.p = 1;
 
-	fill_buff<BNR>(pack_8);
+	fill_buff<BNR>(pack_9);
 
 	BNR pack_10;
 	pack_10.value.address = 217;
-	pack_10.value.high = conv1.conv_dec_to_bin();
+	pack_10.value.high = conv1.conv_dec_to_bin(AccelerationX.max_value, 20, AccelerationX.height, accelerationx);
 	pack_10.value.sign = 1;
 	pack_10.value.sm = 3;
 	pack_10.value.p = 1;
@@ -241,7 +241,7 @@ void INS::navigation() {
 
 	BNR pack_11;
 	pack_11.value.address = 218;
-	pack_11.value.high = conv1.conv_dec_to_bin();
+	pack_11.value.high = conv1.conv_dec_to_bin(AccelerationY.max_value, 20, AccelerationY.height, accelerationy);
 	pack_11.value.sign = 1;
 	pack_11.value.sm = 3;
 	pack_11.value.p = 1;
@@ -250,7 +250,7 @@ void INS::navigation() {
 
 	BNR pack_12;
 	pack_12.value.address = 219;
-	pack_12.value.high = conv1.conv_dec_to_bin();
+	pack_12.value.high = conv1.conv_dec_to_bin(AccelerationZ.max_value, 20, AccelerationZ.height, accelerationz);
 	pack_12.value.sign = 1;
 	pack_12.value.sm = 3;
 	pack_12.value.p = 1;
@@ -284,7 +284,7 @@ void INS::navigation() {
 }
 
 void INS::start() {
-	if (!isStart)
+	if (not isStart)
 	{
 		test();
 		preparation();
@@ -344,3 +344,4 @@ void INS::fill_buff(T pack)
 	buff_count++;
 	delete[] buff;
 }
+

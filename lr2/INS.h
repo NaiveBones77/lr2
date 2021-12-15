@@ -4,11 +4,12 @@
 #include <iostream>
 #include "Conversion.h"
 #include <random>
+#include "protocol.h"
 
 
 class INS {
 private:
-	double Latitude, Longitude, H, CourseTrue, Tungazh, List, VelocityNS, VelocityEW,
+	Val Latitude, Longitude, H, CourseTrue, Tungazh, List, VelocityNS, VelocityEW,
 		VelocityVI, AccelerationX, AccelerationZ, AccelerationY;
 	std::mutex mutex;
 	char* buffer;
@@ -23,9 +24,9 @@ private:
 
 
 public:
-	INS(double Latitude, double Longitude, double H, double CourseTrue,
-		double Tungazh, double List, double VelocityNS, double VelocityEW, double VelocityVI,
-		double AccelerationX, double AccelerationZ, double AccelerationY);
+	INS(Val Latitude, Val Longitude, Val H, Val CourseTrue,
+		Val Tungazh, Val List, Val VelocityNS, Val VelocityEW, Val VelocityVI,
+		Val AccelerationX, Val AccelerationZ, Val AccelerationY);
 
 	void test();
 

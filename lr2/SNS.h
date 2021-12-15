@@ -4,25 +4,29 @@
 #include <WinSock2.h>
 #include <iostream>
 #include "Conversion.h"
+#include <random>
+#include "protocol.h"
 class SNS
 {
 	private:
-		double H, HDOP, VDOP, trackAngle, curLatitude, curLatitude_pr, curLongitude, curLongitude_pr, delay,
+		Val H, HDOP, VDOP, trackAngle, curLatitude, curLatitude_pr, curLongitude, curLongitude_pr, delay,
 			UTC_high, UTC_low, V_h;
+		int Year = 21, Mounth = 12, Day = 15;
 		std::mutex mutex;
 		char* buffer;
 		bool isStart = false;
 		SOCKET _s;
 		sockaddr_in _destAddr;
-		int buff_count;
-		Conversion cs1;
+		int buff_count, count_nav;
+		Conversion conv1;
+		std::mt19937 generator;
 
 	public:
 
 		// конструктор класса
-		SNS(double H, double HDOP, double VDOP, double trackAngle, double curLatitude, double curLatitude_pr,
-			double curLongitude, double curLambda_pr, double delay, double UTC_high, double UTC_low,
-			double V_h);
+		SNS(Val H, Val HDOP, Val VDOP, Val trackAngle, Val curLatitude, Val curLatitude_pr,
+			Val curLongitude, Val curLongitude_pr, Val delay, Val UTC_high, Val UTC_low,
+			Val V_h);
 
 		//метод тест контроля своих устройств
 		void test();

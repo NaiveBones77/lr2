@@ -96,3 +96,18 @@ union FEATURES {
 	} value;
 };
 #pragma pack(pop)
+
+struct Val {
+	std::string name;
+	double value;
+	int height;
+	double max_value;
+	Val(std::string name, double value, int height, double max_value)
+	{
+		this->name = name;
+		this->value = value;
+		this->height = height;
+		this->max_value = max_value;
+	}
+	Val() {}
+};
