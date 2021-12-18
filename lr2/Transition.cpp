@@ -37,8 +37,10 @@ double Transition::getAngleFromScalars(std::vector<double> x1, std::vector<doubl
 		double x2len = sqrt(pow(x2[0], 2) + pow(x2[1], 2));
 		if (x2[1] < 0)
 			return  -acos((x1[0] * x2[0] + x1[1] * x2[1]) / (x1len * x2len));
-		else
+		else if (x2[1] > 0)
 			return  acos((x1[0] * x2[0] + x1[1] * x2[1]) / (x1len * x2len));
+		else if (x2[1] == 0)
+			return 0;
 	}
 }
 

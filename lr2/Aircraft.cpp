@@ -13,8 +13,10 @@ Aircraft::Aircraft(double longitude, double latitude, double V0, double A0) {
 	yaw = 0;
 	Vx = 0;
 	Vz = 0;
+	PPMs.insert(PPMs.end(), std::vector<double>{-10000, 10000, 6000});
 	PPMs.insert(PPMs.end(), std::vector<double>{10000, 10000, 6000});
 	PPMs.insert(PPMs.end(), std::vector<double>{20000, 10000, 1000});
+	PPMs.insert(PPMs.end(), std::vector<double>{20000, 10000, -6000});
 	tr.setDefault(longitude, latitude);
 }
 
