@@ -24,6 +24,8 @@ INS::INS(Val Latitude, Val Longitude, Val H, Val CourseTrue,
 	this->AccelerationY = AccelerationY;
 }
 
+INS::INS() {};
+
 void INS::test() {
 	auto start = std::chrono::system_clock::now();
 	double time_test = 5;

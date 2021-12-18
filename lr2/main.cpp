@@ -6,6 +6,7 @@
 #include "Timer.cpp"
 
 #include <WinSock2.h>
+#include "Aircraft.h"
 #pragma comment(lib,"Ws2_32.lib")
 
 #define PORT 12346
@@ -92,10 +93,14 @@ int main()
     sns.bindPort(_s, _destAddr);
 
     Timer timer;
-    timer.add(std::chrono::milliseconds(10), [&]() {ins.sendPack(); });
-    timer.add(std::chrono::microseconds(2500), [&]() {ins.start(); });
-    timer.add(std::chrono::milliseconds(1000), [&]() {sns.sendPack(); });
-    timer.add(std::chrono::microseconds(100), [&]() {sns.start(); });
 
-    while (true) { std::this_thread::sleep_for(std::chrono::seconds(3600)); };
+    Aircraft a1(35, 55, 300, 0);
+    a1.run();
+    printf("end");
+    //timer.add(std::chrono::milliseconds(10), [&]() {ins.sendPack(); });
+    //timer.add(std::chrono::microseconds(2500), [&]() {ins.start(); });
+    //timer.add(std::chrono::milliseconds(1000), [&]() {sns.sendPack(); });
+    //timer.add(std::chrono::microseconds(100), [&]() {sns.start(); });
+
+   // while (true) { std::this_thread::sleep_for(std::chrono::seconds(3600)); };
 }

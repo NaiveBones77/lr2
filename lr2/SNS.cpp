@@ -22,6 +22,7 @@ SNS::SNS(Val H, Val HDOP, Val VDOP, Val trackAngle, Val curLatitude, Val curLati
 	this->V_h = V_h;
 }
 
+SNS::SNS() {};
 
 
 void SNS::test() {

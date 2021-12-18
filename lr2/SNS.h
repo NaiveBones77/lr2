@@ -8,7 +8,7 @@
 #include "protocol.h"
 class SNS
 {
-	private:
+public:
 		Val H, HDOP, VDOP, trackAngle, curLatitude, curLatitude_pr, curLongitude, curLongitude_pr, delay,
 			UTC_high, UTC_low, V_h;
 		int Year = 21, Mounth = 12, Day = 15;
@@ -21,12 +21,13 @@ class SNS
 		Conversion conv1;
 		std::mt19937 generator;
 
-	public:
+
 
 		// конструктор класса
 		SNS(Val H, Val HDOP, Val VDOP, Val trackAngle, Val curLatitude, Val curLatitude_pr,
 			Val curLongitude, Val curLongitude_pr, Val delay, Val UTC_high, Val UTC_low,
 			Val V_h);
+		SNS();
 
 		//метод тест контроля своих устройств
 		void test();

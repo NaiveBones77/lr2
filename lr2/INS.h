@@ -8,7 +8,8 @@
 
 
 class INS {
-private:
+public:
+
 	Val Latitude, Longitude, H, CourseTrue, Tungazh, List, VelocityNS, VelocityEW,
 		VelocityVI, AccelerationX, AccelerationZ, AccelerationY;
 	std::mutex mutex;
@@ -23,7 +24,7 @@ private:
 	std::mt19937 generator;
 
 
-public:
+
 	INS(Val Latitude, Val Longitude, Val H, Val CourseTrue,
 		Val Tungazh, Val List, Val VelocityNS, Val VelocityEW, Val VelocityVI,
 		Val AccelerationX, Val AccelerationZ, Val AccelerationY);
