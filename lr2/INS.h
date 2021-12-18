@@ -28,6 +28,8 @@ public:
 		Val Tungazh, Val List, Val VelocityNS, Val VelocityEW, Val VelocityVI,
 		Val AccelerationX, Val AccelerationZ, Val AccelerationY);
 
+	INS();
+
 	void test();
 
 	void preparation();

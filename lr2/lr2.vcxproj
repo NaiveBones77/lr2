@@ -139,17 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Aircraft.h" />
     <ClInclude Include="INS.h" />
     <ClInclude Include="protocol.h" />
     <ClInclude Include="SNS.h" />
     <ClInclude Include="Conversion.h" />
+    <ClInclude Include="Transition.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Aircraft.cpp" />
     <ClCompile Include="INS.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SNS.cpp" />
     <ClCompile Include="Conversion.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Transition.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
