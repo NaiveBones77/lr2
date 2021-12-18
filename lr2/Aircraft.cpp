@@ -50,8 +50,8 @@ void Aircraft::run()
 std::vector<double> Aircraft::OPS(int index)
 {
 	std::vector<double> res = { 0 };
-	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, std::vector<double> {PPMs[index][0], PPMs[index][2]});
-	if (delta - A <= 0.011)
+	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
+	if (abs(delta - A) <= 0.011)
 	{
 		res[0] = 0;
 		return res;
@@ -68,5 +68,7 @@ std::vector<double> Aircraft::OPS(int index)
 		res[0] = -yawmax_pr;
 		return res;
 	}
+
+	
 		
 }
