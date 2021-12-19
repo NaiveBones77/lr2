@@ -70,7 +70,51 @@ std::vector<double> Aircraft::OPS(int index)
 		res[0] = -yawmax_pr;
 		return res;
 	}
+}
 
-	
-		
+void Aircraft::run2()
+{
+	double dt = 0.1;
+	coordinates.insert(coordinates.end(), startSK);
+	if (index < PPMs.size())
+	{
+		mutex.lock();
+		A = A + Xpr[0] * dt;
+		Vx = V * cos(A);
+		Vz = V * sin(A);
+		startSK[0] = startSK[0] + Vx * dt;
+		startSK[2] = startSK[2] + Vz * dt;
+		if (tr.getDistance(startSK, PPMs[countPPM]) < 1000)
+		{
+			index += 1;
+		}
+		if (countOperation > 500)
+		{
+			printf("100");
+		}
+		countOperation += 1;
+		mutex.unlock();
+	}
+}
+
+void Aircraft::OPS2()
+{
+	mutex.lock();
+	std::vector<double> res = { 0 };
+	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
+	if (abs(delta - A) <= 0.011)
+	{
+		Xpr[0] = 0;
+	}
+
+	if (delta > A)
+	{
+		Xpr[0] = yawmax_pr;
+	}
+
+	else if (delta < A)
+	{
+		Xpr[0]  = -yawmax_pr;
+	}
+	mutex.unlock();
 }

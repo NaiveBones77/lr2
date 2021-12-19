@@ -3,6 +3,7 @@
 #include "INS.h"
 #include <vector>
 #include "Transition.h"
+#include <mutex>
 using namespace std;
 
 class Aircraft {
@@ -10,6 +11,7 @@ private:
 	INS ins;
 	SNS sns;
 	Transition tr;
+	mutex mutex;
 
 	double roll, pitch, yaw;		//крен тангаж рысканье
 	double longitude, latitude;		//долгота широта
@@ -21,15 +23,20 @@ private:
 	vector <vector<double>> PPMs;				//координаты ППМов в стартовой СК
 
 	vector <double> Xpr = {0};					//Произвоная по рысканью
-	double yawmax_pr = 0.094;
+	int index = 0;								//индекс элемента из ППМ
+	double yawmax_pr = 0.14;
+	int countPPM = 0;							//количество ППМОВ
+	int countOperation = 0;						//количество операций
 
 public:
 	Aircraft();
 	Aircraft(double longitude, double latitude, double V0, double A0);
 		
 	void run();
+	void run2();
 
 	vector<double> OPS(int index);
+	void OPS2();
 
 
 };

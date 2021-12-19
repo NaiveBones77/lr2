@@ -49,3 +49,10 @@ double Transition::getDistance(std::vector<double> x1, std::vector<double> x2)
 	double a = sqrt(pow(x1[0] - x2[0], 2) + pow(x1[1] - x2[1], 2) + pow(x1[2] - x2[2], 2));
 	return a;
 }
+
+
+void Transition::WriteFile(std::vector<double> vec)
+{
+	//открывать файл
+	//дозаписывать в конец файла координаты "vec[0], vec[1], vec[2]" через " "
+}
