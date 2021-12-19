@@ -126,14 +126,17 @@ void Aircraft::OPS2()
 
 void Aircraft::fillSNS(std::vector<double> vec)
 {
+	sns.mutex.lock();
 	sns.H.value = 10000;
 	sns.trackAngle.value = vec[0];
 	sns.curLatitude.value = vec[1];
 	sns.curLongitude.value = vec[2];
+	sns.mutex.unlock();
 }
 
 void Aircraft::fillINS(std::vector<double> vec)
 {
+	ins.mutex.lock();
 	ins.H.value = 10000;
 	ins.Latitude.value = vec[0];
 	ins.Longitude.value = vec[1];
@@ -142,4 +145,5 @@ void Aircraft::fillINS(std::vector<double> vec)
 	ins.List.value = vec[4];
 	ins.VelocityNS.value = vec[5];
 	ins.VelocityEW.value = vec[6];
+	ins.mutex.unlock();
 }
