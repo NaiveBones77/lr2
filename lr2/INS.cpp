@@ -133,6 +133,7 @@ void INS::navigation() {
 		count_nav++;
 	}
 
+	
 	std::normal_distribution<double>delta(0.0, 0.01);
 
 	double latitude = Latitude.value + delta(generator);

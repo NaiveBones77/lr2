@@ -8,8 +8,7 @@ using namespace std;
 
 class Aircraft {
 private:
-	INS ins;
-	SNS sns;
+	
 	Transition tr;
 	mutex mutex;
 
@@ -32,6 +31,9 @@ private:
 	vector<double> distSP = { 3885000, 0 };		//м до сев. полюса от текущей точки
 
 public:
+	INS ins;
+	SNS sns;
+
 	Aircraft();
 	Aircraft(double longitude, double latitude, double V0, double A0);
 		

@@ -18,6 +18,33 @@ Aircraft::Aircraft(double longitude, double latitude, double V0, double A0) {
 	PPMs.insert(PPMs.end(), std::vector<double>{20000, 10000, 1000});
 	PPMs.insert(PPMs.end(), std::vector<double>{20000, 10000, -6000});
 	tr.setDefault(longitude, latitude);
+	SNS sns(Val("высота", 10, 20, 65536),
+		Val("HDOP", 10.0, 15, 512),
+		Val("VDOP", 10.0, 15, 512),
+		Val("путевой угол", 5.0, 15, 90),
+		Val("текущая широта ", 55, 20, 90),
+		Val("текущая широта (точно)", 3, 11, 0.000085830),
+		Val("текущая долгота", 35, 20, 90),
+		Val("текущая долгота (точно)", 4, 11, 0.000085830),
+		Val("задержка выдачи", 13.3, 20, 512),
+		Val("текущее время UTC (старшие разряды)", 6.0, 6, 32),
+		Val("текущее время UTC (младшие разряды)", 2.0, 20, 512),
+		Val("вертикальная скорость", 1.0, 15, 16384)
+	);
+
+	INS ins(Val("широта", 28, 20, 90),
+		Val("долгота", 55, 20, 90),
+		Val("высота", 130, 19, 19975.3728),
+		Val("курс истинный", 15.3, 16, 90),
+		Val("тангаж", 3.5, 16, 90),
+		Val("крен", 6.3245, 16, 90),
+		Val("скорость север юг", 400, 19, 1053.5822),
+		Val("скорость восток запад", 200, 19, 1053.5822),
+		Val("скорость вертикальная инерциальная", 83, 19, 83.2307),
+		Val("ускорение продольное", 0, 12, 19.62),
+		Val("ускорение поперечное", 0, 12, 19.62),
+		Val("ускорение нормальное", 0, 12, 2)
+	);
 }
 
 Aircraft::Aircraft() {};
@@ -86,7 +113,7 @@ void Aircraft::run2()
 		startSK[2] = startSK[2] + Vz * dt;
 		coordinatesG = tr.fromStart2Geogr(startSK);
 		longitude = coordinatesG[0];
-		latitude = coordinatesG[2];
+		latitude = coordinatesG[1];
 		if (tr.getDistance(startSK, PPMs[index]) < 500)
 		{
 			index += 1;
