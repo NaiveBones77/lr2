@@ -45,6 +45,8 @@ Aircraft::Aircraft(double longitude, double latitude, double V0, double A0) {
 		Val("ускорение поперечное", 0, 12, 19.62),
 		Val("ускорение нормальное", 0, 12, 2)
 	);
+
+	tr.WriteFile(file1, name, 1, std::vector<double> {0, 0, 0});
 }
 
 Aircraft::Aircraft() {};
@@ -71,6 +73,7 @@ void Aircraft::run()
 		
 		countOperation += 1;
 	}
+	
 }
 
 std::vector<double> Aircraft::OPS(int index)
@@ -129,6 +132,16 @@ void Aircraft::run2()
 	std::vector<double> INS_vec = { latitude, longitude, A, pitch, roll, Vx, Vz };
 	fillSNS(SNS_vec);
 	fillINS(INS_vec);
+
+	if (countOperation % 50 == 0)
+	{
+		tr.WriteFile(this->file1, name, 2, std::vector<double> {latitude, longitude, 10000});
+	}
+	if (index > 3)
+	{
+
+		tr.WriteFile(this->file1, name, 3, std::vector<double> {latitude, longitude, 10000});
+	}
 }
 
 void Aircraft::OPS2()

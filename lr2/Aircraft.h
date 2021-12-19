@@ -6,11 +6,14 @@
 #include <mutex>
 using namespace std;
 
+
 class Aircraft {
 private:
 	
 	Transition tr;
 	mutex mutex;
+	FILE* file1;
+	const char* name = "Coordinates.txt";
 
 	double roll, pitch, yaw;		//крен тангаж рысканье
 	double longitude, latitude;		//долгота широта
@@ -28,6 +31,7 @@ private:
 	int countPPM = 0;							//количество ППМОВ
 	int countOperation = 0;						//количество операций
 
+	double t = 0;
 	vector<double> distSP = { 3885000, 0 };		//м до сев. полюса от текущей точки
 
 public:

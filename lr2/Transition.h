@@ -107,6 +107,6 @@ public:
 	void setDefault(double lambda, double phi);
 	double getAngleFromScalars(std::vector<double> x1, std::vector<double> x2);
 	double getDistance(std::vector<double> x1, std::vector<double> x2);
-	void WriteFile(FILE* file1, int flag, std::vector<double> vec);
+	void WriteFile(FILE* file1, const char* name, int flag, std::vector<double> vec);
 };
 

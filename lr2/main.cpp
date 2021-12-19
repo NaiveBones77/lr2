@@ -21,6 +21,7 @@ int main()
 	setlocale(LC_ALL, "rus");
 
 
+
 	INS ins(Val("широта", 28, 20, 90),
             Val("долгота", 55, 20, 90),
             Val("высота", 130, 19, 19975.3728),
@@ -98,11 +99,10 @@ int main()
     a1.sns.bindPort(_s, _destAddr);
 
     //a1.run();
-    printf("end");
-    timer.add(std::chrono::milliseconds(10), [&]() {a1.ins.sendPack(); });
-    timer.add(std::chrono::microseconds(2500), [&]() {a1.ins.start(); });
-    timer.add(std::chrono::milliseconds(1000), [&]() {a1.sns.sendPack(); });
-    timer.add(std::chrono::microseconds(100), [&]() {a1.sns.start(); });
+    //timer.add(std::chrono::milliseconds(10), [&]() {a1.ins.sendPack(); });
+    //timer.add(std::chrono::microseconds(2500), [&]() {a1.ins.start(); });
+    //timer.add(std::chrono::milliseconds(1000), [&]() {a1.sns.sendPack(); });
+    //timer.add(std::chrono::microseconds(100), [&]() {a1.sns.start(); });
     timer.add(std::chrono::microseconds(1000), [&]() {a1.run2(); });
     timer.add(std::chrono::microseconds(1000), [&]() {a1.OPS2(); });
     while (true) { std::this_thread::sleep_for(std::chrono::seconds(3600)); };

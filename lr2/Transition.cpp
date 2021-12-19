@@ -105,10 +105,11 @@ double Transition::getDistance(std::vector<double> x1, std::vector<double> x2)
 }
 
 
-void Transition::WriteFile(FILE* file1, int flag, std::vector<double> vec) {
+void Transition::WriteFile(FILE* file1, const char* name, int flag, std::vector<double> vec) {
+	fopen_s(&file1, name, "w");
 	if (flag == 1) {
-		fprintf_s(file1, "<?xml version=\"1.0\" encoding=\"UTF - 8\"?>");
-		fprintf_s(file1, "\n<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom='http://www.w3.org/2005/Atom\">");
+		fprintf_s(file1, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		fprintf_s(file1, "\n<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">");
 		fprintf_s(file1, "\n<Document>");
 		fprintf_s(file1, "\n%-8s", " ");
 		fprintf_s(file1, "<name>Шереметьево-Хитроу.kml</name>");
