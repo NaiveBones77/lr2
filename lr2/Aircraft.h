@@ -28,6 +28,8 @@ private:
 	int countPPM = 0;							//количество ППМОВ
 	int countOperation = 0;						//количество операций
 
+	vector<double> distSP = { 3885000, 0 };		//м до сев. полюса от текущей точки
+
 public:
 	Aircraft();
 	Aircraft(double longitude, double latitude, double V0, double A0);

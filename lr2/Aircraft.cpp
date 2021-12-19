@@ -52,7 +52,9 @@ void Aircraft::run()
 std::vector<double> Aircraft::OPS(int index)
 {
 	std::vector<double> res = { 0 };
-	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
+	
+	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, 
+		std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
 	if (abs(delta - A) <= 0.011)
 	{
 		res[0] = 0;
@@ -84,6 +86,7 @@ void Aircraft::run2()
 		Vz = V * sin(A);
 		startSK[0] = startSK[0] + Vx * dt;
 		startSK[2] = startSK[2] + Vz * dt;
+
 		if (tr.getDistance(startSK, PPMs[countPPM]) < 500)
 		{
 			index += 1;
@@ -100,6 +103,9 @@ void Aircraft::run2()
 void Aircraft::OPS2()
 {
 	mutex.lock();
+	std::vector<double> ort = { 0, 0 };
+	ort[0] = (distSP[0] - startSK[0]) / tr.getDistance(distSP, startSK);
+	ort[1] = (distSP[1] - startSK[1]) / tr.getDistance(distSP, startSK);
 	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
 	if (abs(delta - A) <= 0.011)
 	{
@@ -121,6 +127,19 @@ void Aircraft::OPS2()
 void Aircraft::fillSNS(std::vector<double> vec)
 {
 	sns.H.value = 10000;
-	sns.curLatitude.value = vec[0];
-	sns.
+	sns.trackAngle.value = vec[0];
+	sns.curLatitude.value = vec[1];
+	sns.curLongitude.value = vec[2];
+}
+
+void Aircraft::fillINS(std::vector<double> vec)
+{
+	ins.H.value = 10000;
+	ins.Latitude.value = vec[0];
+	ins.Longitude.value = vec[1];
+	ins.CourseTrue.value = vec[2];
+	ins.Tungazh.value = vec[3];
+	ins.List.value = vec[4];
+	ins.VelocityNS.value = vec[5];
+	ins.VelocityEW.value = vec[6];
 }
