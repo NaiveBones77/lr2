@@ -13,7 +13,7 @@ Aircraft::Aircraft(double longitude, double latitude, double V0, double A0) {
 	yaw = 0;
 	Vx = 0;
 	Vz = 0;
-	PPMs.insert(PPMs.end(), std::vector<double>{-10000, 10000, 6000});
+	PPMs.insert(PPMs.end(), std::vector<double>{-10000, 10000, 10000});
 	PPMs.insert(PPMs.end(), std::vector<double>{10000, 10000, 6000});
 	PPMs.insert(PPMs.end(), std::vector<double>{20000, 10000, 1000});
 	PPMs.insert(PPMs.end(), std::vector<double>{20000, 10000, -6000});
@@ -41,10 +41,7 @@ void Aircraft::run()
 		{
 			countPPM += 1;
 		}
-		if (countOperation > 500)
-		{
-			printf("100");
-		}
+		
 		countOperation += 1;
 	}
 }
@@ -77,6 +74,7 @@ std::vector<double> Aircraft::OPS(int index)
 void Aircraft::run2()
 {
 	double dt = 0.1;
+	
 	coordinates.insert(coordinates.end(), startSK);
 	if (index < PPMs.size())
 	{
@@ -86,27 +84,34 @@ void Aircraft::run2()
 		Vz = V * sin(A);
 		startSK[0] = startSK[0] + Vx * dt;
 		startSK[2] = startSK[2] + Vz * dt;
-
-		if (tr.getDistance(startSK, PPMs[countPPM]) < 500)
+		coordinatesG = tr.fromStart2Geogr(startSK);
+		longitude = coordinatesG[0];
+		latitude = coordinatesG[2];
+		if (tr.getDistance(startSK, PPMs[index]) < 500)
 		{
 			index += 1;
 		}
-		if (countOperation > 500)
+		if (countOperation > 550)
 		{
 			printf("100");
 		}
 		countOperation += 1;
 		mutex.unlock();
 	}
+	std::vector<double> SNS_vec = { A, longitude, latitude };
+	std::vector<double> INS_vec = { latitude, longitude, A, pitch, roll, Vx, Vz };
+	fillSNS(SNS_vec);
+	fillINS(INS_vec);
 }
 
 void Aircraft::OPS2()
 {
 	mutex.lock();
+
 	std::vector<double> ort = { 0, 0 };
 	ort[0] = (distSP[0] - startSK[0]) / tr.getDistance(distSP, startSK);
 	ort[1] = (distSP[1] - startSK[1]) / tr.getDistance(distSP, startSK);
-	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
+	double delta = tr.getAngleFromScalars(ort, std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
 	if (abs(delta - A) <= 0.011)
 	{
 		Xpr[0] = 0;

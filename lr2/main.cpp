@@ -94,7 +94,7 @@ int main()
 
     Timer timer;
 
-    Aircraft a1(35, 55, 300, 0);
+    Aircraft a1(37.41255708413501, 55.97313079458042, 300, 0);
     //a1.run();
     printf("end");
     //timer.add(std::chrono::milliseconds(10), [&]() {ins.sendPack(); });

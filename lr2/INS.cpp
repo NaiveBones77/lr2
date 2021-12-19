@@ -286,12 +286,13 @@ void INS::navigation() {
 }
 
 void INS::start() {
-	if (not isStart)
-	{
-		test();
-		preparation();
-		isStart = true;
-	}
+	//if (not isStart)
+	//{
+	//	test();
+	//	preparation();
+	//	isStart = true;
+	//}
+	isStart = true;
 	navigation();
 }
 

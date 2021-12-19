@@ -20,6 +20,7 @@ private:
 	vector <double> startSK = { 0,10000,0 };
 
 	vector <vector<double>> coordinates;		//координаты ЛА в стартовой СК
+	vector <double> coordinatesG;				//координаты ЛА в географической СК
 	vector <vector<double>> PPMs;				//координаты ППМов в стартовой СК
 
 	vector <double> Xpr = {0};					//Произвоная по рысканью
