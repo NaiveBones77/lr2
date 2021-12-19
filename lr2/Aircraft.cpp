@@ -84,7 +84,7 @@ void Aircraft::run2()
 		Vz = V * sin(A);
 		startSK[0] = startSK[0] + Vx * dt;
 		startSK[2] = startSK[2] + Vz * dt;
-		if (tr.getDistance(startSK, PPMs[countPPM]) < 1000)
+		if (tr.getDistance(startSK, PPMs[countPPM]) < 500)
 		{
 			index += 1;
 		}
@@ -100,7 +100,6 @@ void Aircraft::run2()
 void Aircraft::OPS2()
 {
 	mutex.lock();
-	std::vector<double> res = { 0 };
 	double delta = tr.getAngleFromScalars(std::vector<double> {1, 0}, std::vector<double> {PPMs[index][0] - startSK[0], PPMs[index][2] - startSK[2]});
 	if (abs(delta - A) <= 0.011)
 	{
@@ -117,4 +116,11 @@ void Aircraft::OPS2()
 		Xpr[0]  = -yawmax_pr;
 	}
 	mutex.unlock();
+}
+
+void Aircraft::fillSNS(std::vector<double> vec)
+{
+	sns.H.value = 10000;
+	sns.curLatitude.value = vec[0];
+	sns.
 }

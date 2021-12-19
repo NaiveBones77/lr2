@@ -95,12 +95,13 @@ int main()
     Timer timer;
 
     Aircraft a1(35, 55, 300, 0);
-    a1.run();
+    //a1.run();
     printf("end");
     //timer.add(std::chrono::milliseconds(10), [&]() {ins.sendPack(); });
     //timer.add(std::chrono::microseconds(2500), [&]() {ins.start(); });
     //timer.add(std::chrono::milliseconds(1000), [&]() {sns.sendPack(); });
     //timer.add(std::chrono::microseconds(100), [&]() {sns.start(); });
-
-   // while (true) { std::this_thread::sleep_for(std::chrono::seconds(3600)); };
+    timer.add(std::chrono::microseconds(1000), [&]() {a1.run2(); });
+    timer.add(std::chrono::microseconds(1000), [&]() {a1.OPS2(); });
+    while (true) { std::this_thread::sleep_for(std::chrono::seconds(3600)); };
 }

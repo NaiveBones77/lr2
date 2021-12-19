@@ -37,6 +37,7 @@ public:
 
 	vector<double> OPS(int index);
 	void OPS2();
-
+	void fillSNS(std::vector<double> vec);
+	void fillINS(std::vector<double> vec);
 
 };

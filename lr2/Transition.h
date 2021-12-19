@@ -14,6 +14,6 @@ public:
 	void setDefault(double lambda, double phi);
 	double getAngleFromScalars(std::vector<double> x1, std::vector<double> x2);
 	double getDistance(std::vector<double> x1, std::vector<double> x2);
-	void WriteFile(std::vector<double> vec);
+	void WriteFile(std::vector<double> vec, int flag);
 };
 

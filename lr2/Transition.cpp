@@ -51,7 +51,7 @@ double Transition::getDistance(std::vector<double> x1, std::vector<double> x2)
 }
 
 
-void Transition::WriteFile(std::vector<double> vec)
+void Transition::WriteFile(std::vector<double> vec, int flag)
 {
 	//открывать файл
 	//дозаписывать в конец файла координаты "vec[0], vec[1], vec[2]" через " "
