@@ -46,7 +46,7 @@ Aircraft::Aircraft(double longitude, double latitude, double V0, double A0) {
 		Val("ускорение нормальное", 0, 12, 2)
 	);
 
-	tr.WriteFile(file1, name, 1, std::vector<double> {0, 0, 0});
+	tr.WriteFile2(filepath, 1, std::vector<double> {0, 0, 0});
 }
 
 Aircraft::Aircraft() {};
@@ -135,12 +135,11 @@ void Aircraft::run2()
 
 	if (countOperation % 50 == 0)
 	{
-		tr.WriteFile(this->file1, name, 2, std::vector<double> {latitude, longitude, 10000});
+		tr.WriteFile2(filepath, 2, std::vector<double> {latitude, longitude, 10000});
 	}
 	if (index > 3)
 	{
 
-		tr.WriteFile(this->file1, name, 3, std::vector<double> {latitude, longitude, 10000});
 	}
 }
 

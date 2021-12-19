@@ -4,6 +4,9 @@
 #include <cmath>
 #include <map>
 #include <iostream>
+#include <fstream>
+
+using namespace std;
 
 Transition::Transition() {
 	lambda0 = 37.41255708413501;
@@ -211,5 +214,115 @@ void Transition::WriteFile(FILE* file1, const char* name, int flag, std::vector<
 		fprintf_s(file1, "</Placemark>");
 		fprintf_s(file1, "\n</Document>");
 		fprintf_s(file1, "\n</kml>");
+	}
+}
+
+void Transition::WriteFile2(const char* filepath, int flag, std::vector<double> vec)
+{
+	ofstream fout("C:\\Users\\maxso\\OneDrive\\Рабочий стол\\БОЛА Лабы\\Лаба3\\coordinates.kml");
+	if (flag == 1) {
+		fout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
+		fout << "\n<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">" << endl;
+		fout << "\n<Document>" << endl;
+		fout << "\n%-8s" << endl;
+		fout << "<name>Шереметьево-Хитроу.kml</name>" << endl;
+		fout << "\n%-8s"<< endl;
+		fout << "<Style id=\"s_ylw-pushpin\">" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<IconStyle>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<scale>1.1</scale>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<Icon>" << endl;
+		fout << "\n%-32s" << endl;
+		fout << "<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "</Icon>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<hotSpot x=\"20\" y=\"2\" xunits=\"pixels\" yunits=\"pixels\"/>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "</IconStyle>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<LineStyle>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<color>ffffad41</color>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "</LineStyle>" << endl;
+		fout << "\n%-8s" << endl;
+		fout << "</Style>" << endl;
+		fout << "\n%-8s" << endl;
+		fout << "<Style id=\"s_ylw-pushpin_hl\">" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<IconStyle>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<scale>1.3</scale>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<Icon>" << endl;
+		fout << "\n%-32s" << endl;
+		fout << "<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "</Icon>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<hotSpot x=\"20\" y=\"2\" xunits=\"pixels\" yunits=\"pixels\"/>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "</IconStyle>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<LineStyle>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<color>ffffad41</color>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "</LineStyle>" << endl;
+		fout << "\n%-8s" << endl;
+		fout << "</Style>" << endl;
+		fout << "\n%-8s" << endl;
+		fout << "<StyleMap id=\"m_ylw-pushpin\">" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<Pair>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<key>normal</key>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<styleUrl>#s_ylw-pushpin</styleUrl>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "</Pair>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<Pair>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<key>highlight</key>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<styleUrl>#s_ylw-pushpin_hl</styleUrl>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "</Pair>" << endl;
+		fout << "\n%-8s" << endl;
+		fout << "</StyleMap>" << endl;
+		fout << "\n%-8s" << endl;
+		fout << "<Placemark>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<name>Шереметьево-Хитроу</name>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<styleUrl>#m_ylw-pushpin</styleUrl>" << endl;
+		fout << "\n%-16s" << endl;
+		fout << "<LineString>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<tessellate>1</tessellate>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>" << endl;
+		fout << "\n%-24s" << endl;
+		fout << "<coordinates>" << endl;
+		fout << "\n%-32s" << endl;
+	}
+	if (flag == 2) {
+		fout << "%-.14f" << vec[0] << "," << endl;
+		fout << "%-.14f" << vec[1] << "," << endl;
+		fout << "%-.0f" << vec[2] << "," << endl;
+	}
+	if (flag == 3) {
+	/*	fprintf_s(file1, "\n%-24s", " ");
+		fprintf_s(file1, "</coordinates>");
+		fprintf_s(file1, "\n%-16s", " ");
+		fprintf_s(file1, "</LineString>");
+		fprintf_s(file1, "\n%-8s", " ");
+		fprintf_s(file1, "</Placemark>");
+		fprintf_s(file1, "\n</Document>");
+		fprintf_s(file1, "\n</kml>");*/
 	}
 }

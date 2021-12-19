@@ -2,10 +2,12 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <fstream>
 
 class Transition
 {
 private:
+	std::fstream file;
 	double lambda0, phi0;
 	std::map <int, double > table = { { 0, 111.3},
 								  { 1, 111.3},
@@ -108,5 +110,6 @@ public:
 	double getAngleFromScalars(std::vector<double> x1, std::vector<double> x2);
 	double getDistance(std::vector<double> x1, std::vector<double> x2);
 	void WriteFile(FILE* file1, const char* name, int flag, std::vector<double> vec);
+	void WriteFile2(const char* filepath, int flag, std::vector<double> vec);
 };
 

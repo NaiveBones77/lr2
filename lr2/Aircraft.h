@@ -4,6 +4,8 @@
 #include <vector>
 #include "Transition.h"
 #include <mutex>
+#include <fstream>
+#include <iostream>
 using namespace std;
 
 
@@ -14,6 +16,9 @@ private:
 	mutex mutex;
 	FILE* file1;
 	const char* name = "Coordinates.txt";
+
+	fstream file;
+	const char* filepath = "C:\\Users\\maxso\\OneDrive\\Рабочий стол\\БОЛА Лабы\\Лаба3\\coordinates.kml";
 
 	double roll, pitch, yaw;		//крен тангаж рысканье
 	double longitude, latitude;		//долгота широта
